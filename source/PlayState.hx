@@ -8,6 +8,7 @@ import flixel.FlxG;
 class PlayState extends FlxState
 {
 	private var txtTitle:FlxText;
+	private var player:Player;
 
 	override public function create():Void
 	{
@@ -15,6 +16,10 @@ class PlayState extends FlxState
         txtTitle.alignment = CENTER;
         txtTitle.screenCenter(X);
         add(txtTitle);
+
+		player = new Player(FlxG.width / 2, FlxG.height / 2);
+		add(player);
+
 		super.create();
 	}
 
