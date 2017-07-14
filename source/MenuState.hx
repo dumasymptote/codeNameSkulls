@@ -9,6 +9,7 @@ class MenuState extends FlxState{
 
     private var txtTitle:FlxText;
     private var btnPlay:FlxButton;
+    private var btnOptions:FlxButton;
 
     override public function create():Void
     {
@@ -22,6 +23,11 @@ class MenuState extends FlxState{
         btnPlay.y = FlxG.height - 20;
         add(btnPlay);
 
+        btnOptions = new FlxButton(0,0,"Options", clickOptions);
+        btnOptions.x = (FlxG.width / 2) + btnOptions.width + 10;
+        btnOptions.y = FlxG.height - 20;
+        add(btnOptions);
+
 
         super.create();
     }
@@ -29,5 +35,9 @@ class MenuState extends FlxState{
     private function clickPlay():Void
     {
         FlxG.switchState(new PlayState());
+    }
+    private function clickOptions():Void
+    {
+        FlxG.switchState(new OptionState());
     }
 }
