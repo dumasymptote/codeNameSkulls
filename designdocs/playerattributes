@@ -1,0 +1,12 @@
+player
+
+- name
+- race
+- hp
+- mp
+- strength 
+- intelligence
+- dexterity
+- xp
+- items
+- skills
