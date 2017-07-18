@@ -99,6 +99,17 @@
       </ScrollFactor>
       <ExportMode>CSV</ExportMode>
     </LayerDefinition>
+    <LayerDefinition xsi:type="EntityLayerDefinition">
+      <Name>Hero</Name>
+      <Grid>
+        <Width>16</Width>
+        <Height>16</Height>
+      </Grid>
+      <ScrollFactor>
+        <X>1</X>
+        <Y>1</Y>
+      </ScrollFactor>
+    </LayerDefinition>
   </LayerDefinitions>
   <Tilesets>
     <Tileset>
@@ -129,14 +140,29 @@
     </EntityDefinition>
     <EntityDefinition Name="treasure" Limit="-1" ResizableX="false" ResizableY="false" Rotatable="false" RotateIncrement="15">
       <Size>
-        <Width>64</Width>
-        <Height>64</Height>
+        <Width>32</Width>
+        <Height>32</Height>
       </Size>
       <Origin>
-        <X>28</X>
-        <Y>56</Y>
+        <X>16</X>
+        <Y>32</Y>
       </Origin>
       <ImageDefinition DrawMode="Image" ImagePath="..\assets\images\box_Icon.png" Tiled="false">
+        <RectColor A="255" R="255" G="0" B="0" />
+      </ImageDefinition>
+      <ValueDefinitions />
+      <NodesDefinition Enabled="false" Limit="-1" DrawMode="None" Ghost="false" />
+    </EntityDefinition>
+    <EntityDefinition Name="Hero" Limit="-1" ResizableX="false" ResizableY="false" Rotatable="false" RotateIncrement="15">
+      <Size>
+        <Width>19</Width>
+        <Height>27</Height>
+      </Size>
+      <Origin>
+        <X>9</X>
+        <Y>27</Y>
+      </Origin>
+      <ImageDefinition DrawMode="Image" ImagePath="..\assets\images\hero_icon.png" Tiled="false">
         <RectColor A="255" R="255" G="0" B="0" />
       </ImageDefinition>
       <ValueDefinitions />
