@@ -1,0 +1,2 @@
+*_icon.* files will be used to represent entities for map editor
+other files will be used in game.
