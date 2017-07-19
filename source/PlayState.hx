@@ -36,8 +36,8 @@ class PlayState extends FlxState
 		add(player);
 
 		FlxG.camera.follow(player, TOPDOWN, 1);
-		FlxG.camera.zoom = 1;
-
+		FlxG.camera.zoom = 2;
+		// to do add a second camera that focuses on the UI so that it isnt affected by the zoom.
 		hud = new HUD(player.hp, player.maxHp, player.mp, player.maxMp, player.exp, player.lvl);
 		add(hud);
 
