@@ -14,6 +14,7 @@ class PlayState extends FlxState
 	private var player:Player;
 	private var map:FlxOgmoLoader;
 	private var mapWalls:FlxTilemap;
+	private var hud:HUD;
 
 	override public function create():Void
 	{
@@ -31,12 +32,15 @@ class PlayState extends FlxState
         add(txtTitle);
 
 		player = new Player();
-		
 		map.loadEntities(placeEntities, "Hero");
-
 		add(player);
+
 		FlxG.camera.follow(player, TOPDOWN, 1);
-		FlxG.camera.zoom = 2;
+		FlxG.camera.zoom = 1;
+
+		hud = new HUD(player.hp, player.maxHp, player.mp, player.maxMp, player.exp, player.lvl);
+		add(hud);
+
 		super.create();
 	}
 

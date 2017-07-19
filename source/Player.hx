@@ -9,10 +9,22 @@ import flixel.math.FlxPoint;
 class Player extends FlxSprite
 {
     private var speed = 200;
+    public var hp:Int;
+    public var maxHp:Int;
+    public var mp:Int;
+    public var maxMp:Int;
+    public var exp:Int;
+    public var lvl:Int;
 
     public function new(?X:Float=0, ?Y:Float=0)
     {
         super(X,Y);
+        //set defaults for player attributes
+        hp = maxHp = 100;
+        mp = maxMp =  50;
+        exp = 0;
+        lvl = 1;
+        //load player shit
         loadGraphic(AssetPaths.hero_sprite__png, true, 16,16);
         setFacingFlip(FlxObject.LEFT, false, false);
         setFacingFlip(FlxObject.RIGHT, true, false);
