@@ -2,7 +2,6 @@ package;
 
 import flixel.FlxState;
 import flixel.text.FlxText;
-import flixel.ui.FlxButton;
 import flixel.FlxG;
 import flixel.addons.editors.ogmo.FlxOgmoLoader;
 import flixel.tile.FlxTilemap;
@@ -37,6 +36,7 @@ class PlayState extends FlxState
 
 		add(player);
 		FlxG.camera.follow(player, TOPDOWN, 1);
+		FlxG.camera.zoom = 2;
 		super.create();
 	}
 
