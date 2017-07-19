@@ -8,7 +8,7 @@ import flixel.math.FlxPoint;
 
 class Player extends FlxSprite
 {
-    private var speed = 320;
+    private var speed = 200;
 
     public function new(?X:Float=0, ?Y:Float=0)
     {
