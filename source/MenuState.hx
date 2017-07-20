@@ -20,12 +20,14 @@ class MenuState extends FlxState{
 
         btnPlay = new FlxButton(0,0,"Play", clickPlay);
         btnPlay.x = (FlxG.width / 2) - btnPlay.width - 10;
-        btnPlay.y = FlxG.height - 20;
+        btnPlay.y = FlxG.height - 50;
+        btnPlay.scale.x = btnPlay.scale.y = 1.5;
         add(btnPlay);
 
         btnOptions = new FlxButton(0,0,"Options", clickOptions);
         btnOptions.x = (FlxG.width / 2) + btnOptions.width + 10;
-        btnOptions.y = FlxG.height - 20;
+        btnOptions.y = FlxG.height - 50;
+        btnOptions.scale.x = btnOptions.scale.y = 1.5;
         add(btnOptions);
 
 

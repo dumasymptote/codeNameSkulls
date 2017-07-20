@@ -12,6 +12,7 @@ import flixel.util.FlxColor;
 
 class PlayState extends FlxState
 {
+	private var lvlNo:Int;
 	private var txtTitle:FlxText;
 	private var player:Player;
 	private var map:FlxOgmoLoader;
@@ -21,14 +22,19 @@ class PlayState extends FlxState
 	private var playerCam:FlxCamera;
 	private var exits:FlxTypedGroup<Exit>;
 
+	public function new(?lvl:Int=1)
+	{
+		lvlNo = lvl;
+		super();
+	}
+
 	override public function create():Void
 	{
-
 		uiCam = new FlxCamera(0, 0, FlxG.width, Math.floor(FlxG.height/20));
 		playerCam = new FlxCamera(0,Math.floor(FlxG.height/20), FlxG.width,  FlxG.height - Math.floor(FlxG.height/20));
 		playerCam.zoom = 2;
 
-		map = new FlxOgmoLoader("assets/data/level-001.oel");
+		map = new FlxOgmoLoader("assets/data/level-" + StringTools.lpad(Std.string(lvlNo), "0", 3) + ".oel");
 		mapWalls = map.loadTilemap(AssetPaths.tileset__png, 16,16, "Tiles");
 		mapWalls.follow(playerCam);
 		mapWalls.setTileProperties(1, FlxObject.ANY,54);
