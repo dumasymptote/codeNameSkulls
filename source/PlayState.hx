@@ -6,6 +6,7 @@ import flixel.FlxG;
 import flixel.addons.editors.ogmo.FlxOgmoLoader;
 import flixel.tile.FlxTilemap;
 import flixel.FlxObject;
+import flixel.FlxCamera;
 
 
 class PlayState extends FlxState
@@ -15,12 +16,19 @@ class PlayState extends FlxState
 	private var map:FlxOgmoLoader;
 	private var mapWalls:FlxTilemap;
 	private var hud:HUD;
+	private var uiCam:FlxCamera;
+	private var playerCam:FlxCamera;
 
 	override public function create():Void
 	{
+
+		uiCam = new FlxCamera(0, 0, FlxG.width, Math.floor(FlxG.height/20));
+		playerCam = new FlxCamera(0,Math.floor(FlxG.height/20), FlxG.width,  FlxG.height - Math.floor(FlxG.height/20));
+		playerCam.zoom = 2;
+
 		map = new FlxOgmoLoader("assets/data/level-001.oel");
 		mapWalls = map.loadTilemap(AssetPaths.tileset__png, 16,16, "Tiles");
-		mapWalls.follow();
+		mapWalls.follow(playerCam);
 		mapWalls.setTileProperties(1, FlxObject.ANY,54);
 		mapWalls.setTileProperties(56, FlxObject.NONE,5);
 		add(mapWalls);
@@ -35,11 +43,14 @@ class PlayState extends FlxState
 		map.loadEntities(placeEntities, "Hero");
 		add(player);
 
-		FlxG.camera.follow(player, TOPDOWN, 1);
-		FlxG.camera.zoom = 2;
 		// to do add a second camera that focuses on the UI so that it isnt affected by the zoom.
 		hud = new HUD(player.hp, player.maxHp, player.mp, player.maxMp, player.exp, player.lvl);
 		add(hud);
+
+		
+		playerCam.follow(player, TOPDOWN, 1);
+		FlxG.cameras.reset(uiCam);
+		FlxG.cameras.add(playerCam);
 
 		super.create();
 	}

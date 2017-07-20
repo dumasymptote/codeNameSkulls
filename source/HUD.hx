@@ -21,7 +21,7 @@ class HUD extends FlxTypedGroup<FlxSprite>
     public function new(hp:Int, maxHp:Int, mp:Int, maxMp:Int, exp:Int, lvl:Int)
     {
         super();
-        background = new FlxSprite().makeGraphic(FlxG.width, Math.floor(FlxG.height/10), FlxColor.BLACK); //creates a bar for the hud to go on.
+        background = new FlxSprite().makeGraphic(FlxG.width, Math.floor(FlxG.height/20), FlxColor.BLACK); //creates a bar for the hud to go on.
         background.drawRect(0,(FlxG.height/10) - 1, FlxG.width, 1, FlxColor.WHITE); //a white bar as a separator
         txtHp = new FlxText(16, 2, 0, hp + " / " + maxHp, 8 );
         txtHp.setBorderStyle(SHADOW, FlxColor.GRAY, 1, 1);
