@@ -7,7 +7,8 @@ import flixel.addons.editors.ogmo.FlxOgmoLoader;
 import flixel.tile.FlxTilemap;
 import flixel.FlxObject;
 import flixel.FlxCamera;
-
+import flixel.group.FlxGroup.FlxTypedGroup;
+import flixel.util.FlxColor;
 
 class PlayState extends FlxState
 {
@@ -18,6 +19,7 @@ class PlayState extends FlxState
 	private var hud:HUD;
 	private var uiCam:FlxCamera;
 	private var playerCam:FlxCamera;
+	private var exits:FlxTypedGroup<Exit>;
 
 	override public function create():Void
 	{
@@ -39,6 +41,9 @@ class PlayState extends FlxState
         txtTitle.screenCenter(X);
         add(txtTitle);
 
+		exits = new FlxTypedGroup<Exit>();
+		add(exits);
+
 		player = new Player();
 		map.loadEntities(placeEntities, "Hero");
 		add(player);
@@ -59,6 +64,7 @@ class PlayState extends FlxState
 	{
 		super.update(elapsed);
 		FlxG.collide(player, mapWalls);
+		FlxG.overlap(player, exits, playerExit);
 	}
 
 	private function placeEntities(entityName:String, entityData:Xml):Void
@@ -71,6 +77,12 @@ class PlayState extends FlxState
 			case "Hero" : 
 				player.x = x;
 				player.y = y;
+			case "exit" :
+				exits.add(new Exit(x, y, Std.parseInt(entityData.get("nxtLevel"))));
 		}
+	}
+	private function playerExit(p:Player, e:Exit):Void
+	{
+		FlxG.switchState(new TransitionState(e.get_nxtLevel()));
 	}
 }
