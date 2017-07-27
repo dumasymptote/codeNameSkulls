@@ -35,6 +35,7 @@ class Player extends FlxSprite
         animation.add("u", [6,7,6,8], 6, false);
         drag.x = drag.y = 1600;
         scale.x = scale.y =  1.5;
+        
     }
     override public function update(elapsed:Float):Void
     {
@@ -131,9 +132,4 @@ class Player extends FlxSprite
         return this.exp;
     public function get_lvl():Int
         return this.lvl;
-    public function updatePos(X:Int, Y:Int):Void
-    {
-        super.x = X;
-        super.y = Y;
-    }
 }

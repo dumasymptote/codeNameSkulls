@@ -46,6 +46,10 @@ class PlayState extends FlxState
 		{
 			Game.player = new Player();
 		}
+		else
+		{
+			Game.player = new Player(0,0, Game.player.get_hp(), Game.player.get_maxHp(), Game.player.get_mp(), Game.player.get_maxMp(), Game.player.get_exp(), Game.player.get_lvl());
+		}
 
 		map.loadEntities(placeEntities, "Hero");
 		add(Game.player);
@@ -81,7 +85,8 @@ class PlayState extends FlxState
 		switch (entityName)
 		{
 			case "Hero" : 
-				Game.player.updatePos(x, y);
+				Game.player.x = x;
+				Game.player.y = y;
 			case "exit" :
 				exits.add(new Exit(x, y, Std.parseInt(entityData.get("nxtLevel"))));
 		}
