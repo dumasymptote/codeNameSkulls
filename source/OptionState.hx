@@ -40,6 +40,7 @@ class OptionState extends FlxState
         FlxG.fullscreen = !FlxG.fullscreen;
         btnFullScreen.text = FlxG.fullscreen ? "Windowed" : "Fullscreen";
         optionsSave.data.fullscreen = FlxG.fullscreen;
+        optionsSave.flush();
     }
     private function backClick():Void
     {

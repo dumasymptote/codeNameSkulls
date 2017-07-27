@@ -12,9 +12,7 @@ import flixel.util.FlxColor;
 
 class PlayState extends FlxState
 {
-	private var lvlNo:Int;
 	private var txtTitle:FlxText;
-	private var player:Player;
 	private var map:FlxOgmoLoader;
 	private var mapWalls:FlxTilemap;
 	private var hud:HUD;
@@ -22,19 +20,20 @@ class PlayState extends FlxState
 	private var playerCam:FlxCamera;
 	private var exits:FlxTypedGroup<Exit>;
 
+
 	public function new(?lvl:Int=1)
 	{
-		lvlNo = lvl;
+		Game.gameLevel = lvl;
 		super();
 	}
 
 	override public function create():Void
 	{
-		uiCam = new FlxCamera(0, 0, FlxG.width, Math.floor(FlxG.height/20));
-		playerCam = new FlxCamera(0,Math.floor(FlxG.height/20), FlxG.width,  FlxG.height - Math.floor(FlxG.height/20));
+		uiCam = new FlxCamera(0, 0, FlxG.width, Math.floor(FlxG.height/25));
+		playerCam = new FlxCamera(0,Math.floor(FlxG.height/25), FlxG.width,  FlxG.height - Math.floor(FlxG.height/25));
 		playerCam.zoom = 2;
 
-		map = new FlxOgmoLoader("assets/data/level-" + StringTools.lpad(Std.string(lvlNo), "0", 3) + ".oel");
+		map = new FlxOgmoLoader("assets/data/level-" + StringTools.lpad(Std.string(Game.gameLevel), "0", 3) + ".oel");
 		mapWalls = map.loadTilemap(AssetPaths.tileset__png, 16,16, "Tiles");
 		mapWalls.follow(playerCam);
 		mapWalls.setTileProperties(1, FlxObject.ANY,54);
@@ -49,17 +48,21 @@ class PlayState extends FlxState
 
 		exits = new FlxTypedGroup<Exit>();
 		add(exits);
+		
+		if( Game.player == null)
+		{
+			Game.player = new Player();
+		}
 
-		player = new Player();
 		map.loadEntities(placeEntities, "Hero");
-		add(player);
+		add(Game.player);
 
 		// to do add a second camera that focuses on the UI so that it isnt affected by the zoom.
-		hud = new HUD(player.hp, player.maxHp, player.mp, player.maxMp, player.exp, player.lvl);
+		hud = new HUD(Game.player.get_hp(), Game.player.get_maxHp(), Game.player.get_mp(), Game.player.get_maxMp(), Game.player.get_exp(), Game.player.get_lvl());
 		add(hud);
 
-		
-		playerCam.follow(player, TOPDOWN, 1);
+		Game.player.camera = playerCam;
+		playerCam.follow(Game.player, TOPDOWN, 1);
 		FlxG.cameras.reset(uiCam);
 		FlxG.cameras.add(playerCam);
 
@@ -69,8 +72,12 @@ class PlayState extends FlxState
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
-		FlxG.collide(player, mapWalls);
-		FlxG.overlap(player, exits, playerExit);
+		FlxG.collide(Game.player, mapWalls);
+		FlxG.overlap(Game.player, exits, playerExit);
+		if(FlxG.keys.pressed.ESCAPE)
+		{
+			FlxG.switchState(new MenuState());
+		}
 	}
 
 	private function placeEntities(entityName:String, entityData:Xml):Void
@@ -81,8 +88,7 @@ class PlayState extends FlxState
 		switch (entityName)
 		{
 			case "Hero" : 
-				player.x = x;
-				player.y = y;
+				Game.player.updatePos(x, y);
 			case "exit" :
 				exits.add(new Exit(x, y, Std.parseInt(entityData.get("nxtLevel"))));
 		}

@@ -9,22 +9,35 @@ import flixel.math.FlxPoint;
 class Player extends FlxSprite
 {
     private var speed = 200;
-    public var hp:Int;
-    public var maxHp:Int;
-    public var mp:Int;
-    public var maxMp:Int;
-    public var exp:Int;
-    public var lvl:Int;
+    private var hp(get, null):Int;
+    private var maxHp(get, null):Int;
+    private var mp(get, null):Int;
+    private var maxMp(get, null):Int;
+    private var exp(get, null):Int;
+    private var lvl(get, null):Int;
 
-    public function new(?X:Float=0, ?Y:Float=0)
+    public function new(?X:Float=0, ?Y:Float=0, ?HP:Int=100, ?MAXHP:Int=100, ?MP:Int=50, ?MAXMP:Int=50,?EXP:Int=0, ?LVL:Int=1)
     {
         super(X,Y);
         //set defaults for player attributes
-        hp = maxHp = 100;
-        mp = maxMp =  50;
-        exp = 0;
-        lvl = 1;
+        hp = HP;
+        maxHp = MAXHP;
+        mp = MP;
+        maxMp = MAXMP;
+        exp = EXP;
+        lvl = LVL;
         //load player shit
+        loadGraphic(AssetPaths.hero_sprite__png, true, 16,16);
+        setFacingFlip(FlxObject.LEFT, false, false);
+        setFacingFlip(FlxObject.RIGHT, true, false);
+        animation.add("d", [0,1,0,2], 6, false);
+        animation.add("lr", [3,4,3,5], 6, false);
+        animation.add("u", [6,7,6,8], 6, false);
+        drag.x = drag.y = 1600;
+        scale.x = scale.y =  1.5;
+    }
+    public function drawNewSprite():Void
+    {
         loadGraphic(AssetPaths.hero_sprite__png, true, 16,16);
         setFacingFlip(FlxObject.LEFT, false, false);
         setFacingFlip(FlxObject.RIGHT, true, false);
@@ -116,5 +129,22 @@ class Player extends FlxSprite
             animation.curAnim.curFrame = 0;
             animation.curAnim.pause();
         }
+    }
+    public function get_hp():Int
+        return this.hp;
+    public function get_mp():Int
+        return this.mp;
+    public function get_maxHp():Int
+        return this.maxHp;
+    public function get_maxMp():Int
+        return this.maxMp;
+    public function get_exp():Int
+        return this.exp;
+    public function get_lvl():Int
+        return this.lvl;
+    public function updatePos(X:Int, Y:Int):Void
+    {
+        super.x = X;
+        super.y = Y;
     }
 }
