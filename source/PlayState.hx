@@ -20,13 +20,6 @@ class PlayState extends FlxState
 	private var playerCam:FlxCamera;
 	private var exits:FlxTypedGroup<Exit>;
 
-
-	public function new(?lvl:Int=1)
-	{
-		Game.gameLevel = lvl;
-		super();
-	}
-
 	override public function create():Void
 	{
 		uiCam = new FlxCamera(0, 0, FlxG.width, Math.floor(FlxG.height/25));
@@ -95,6 +88,7 @@ class PlayState extends FlxState
 	}
 	private function playerExit(p:Player, e:Exit):Void
 	{
-		FlxG.switchState(new TransitionState(e.get_nxtLevel()));
+		Game.gameLevel = e.get_nxtLevel();
+		FlxG.switchState(new TransitionState());
 	}
 }

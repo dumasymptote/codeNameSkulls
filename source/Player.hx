@@ -36,17 +36,6 @@ class Player extends FlxSprite
         drag.x = drag.y = 1600;
         scale.x = scale.y =  1.5;
     }
-    public function drawNewSprite():Void
-    {
-        loadGraphic(AssetPaths.hero_sprite__png, true, 16,16);
-        setFacingFlip(FlxObject.LEFT, false, false);
-        setFacingFlip(FlxObject.RIGHT, true, false);
-        animation.add("d", [0,1,0,2], 6, false);
-        animation.add("lr", [3,4,3,5], 6, false);
-        animation.add("u", [6,7,6,8], 6, false);
-        drag.x = drag.y = 1600;
-        scale.x = scale.y =  1.5;
-    }
     override public function update(elapsed:Float):Void
     {
         movement();
