@@ -5,6 +5,7 @@ import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.FlxG;
 import flixel.util.FlxAxes;
+import openfl.Assets;
 
 
 class MenuState extends FlxState{
@@ -19,7 +20,8 @@ class MenuState extends FlxState{
 
     override public function create():Void
     {
-        txtTitle = new FlxText(20,0,0,"Code Named: Skulls", 22);
+        Game.strings = new StringResources(Assets.getText(AssetPaths.strings__txt));
+        txtTitle = new FlxText(20,0,0, Game.strings.get_field("TITLE"), 22);
         txtTitle.alignment = CENTER;
         txtTitle.screenCenter(X);
         add(txtTitle);
