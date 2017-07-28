@@ -29,7 +29,8 @@ class PlayState extends FlxState
 		map = new FlxOgmoLoader("assets/data/level-" + StringTools.lpad(Std.string(Game.gameLevel), "0", 3) + ".oel");
 		mapWalls = map.loadTilemap(AssetPaths.tileset__png, 16,16, "Tiles");
 		mapWalls.follow(playerCam);
-		mapWalls.setTileProperties(1, FlxObject.ANY,54);
+		mapWalls.setTileProperties(1, FlxObject.ANY,7);
+		mapWalls.setTileProperties(8,FlxObject.NONE, 24);
 		mapWalls.setTileProperties(56, FlxObject.NONE,5);
 		add(mapWalls);
 		
