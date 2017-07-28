@@ -35,7 +35,7 @@ class PlayState extends FlxState
 		add(mapWalls);
 		
 
-		txtTitle = new FlxText(20,0,0,"Play State Test", 22);
+		txtTitle = new FlxText(20,0,0,Game.strings.get_field("TEST") , 22);
         txtTitle.alignment = CENTER;
         txtTitle.screenCenter(X);
         add(txtTitle);
