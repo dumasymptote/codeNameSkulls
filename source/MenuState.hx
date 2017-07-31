@@ -6,6 +6,7 @@ import flixel.ui.FlxButton;
 import flixel.FlxG;
 import flixel.util.FlxAxes;
 import openfl.Assets;
+import firetongue.FireTongue;
 
 
 class MenuState extends FlxState{
@@ -20,8 +21,12 @@ class MenuState extends FlxState{
 
     override public function create():Void
     {
-        Game.strings = new StringResources(Assets.getText(AssetPaths.strings__txt));
-        txtTitle = new FlxText(20,0,0, Game.strings.get_field("TITLE"), 22);
+        if(Game.tongue == null)
+        {
+            Game.tongue = new FireTongue();
+            Game.tongue.init("en-US");
+        }
+        txtTitle = new FlxText(20,0,0, Game.tongue.get("$TITLE","data"), 22);
         txtTitle.alignment = CENTER;
         txtTitle.screenCenter(X);
         add(txtTitle);
