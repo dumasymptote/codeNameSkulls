@@ -74,7 +74,7 @@ class PlayState extends FlxState
 		FlxG.overlap(Game.player, exits, playerExit);
 		if(FlxG.keys.pressed.ESCAPE)
 		{
-			FlxG.switchState(new MenuState());
+			openSubState(new MenuSubState());
 		}
 	}
 
